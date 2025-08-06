@@ -32,3 +32,4 @@ jobs:
             docker compose up --build -d
 
             echo "✅ Staging deployed: http://<ip>/staging"
+
