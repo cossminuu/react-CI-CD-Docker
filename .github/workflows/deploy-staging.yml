@@ -1,8 +1,8 @@
-name: 🚀 Deploy to Production
+name: 🚧 Deploy to Staging
 
 on:
   push:
-    branches: [main]
+    branches: [staging]
 
 jobs:
   deploy:
@@ -20,13 +20,13 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd ~/react-CI-CD-Docker
-            echo "📥 Pulling latest main branch..."
+            echo "📥 Pulling latest staging branch..."
             git reset --hard
             git clean -fd
-            git pull origin main
+            git pull origin staging
 
-            echo "📦 Building & starting containers..."
+            echo "📦 Rebuilding with docker-compose..."
             docker compose down
             docker compose up --build -d
 
-            echo "✅ Production deployed: http://<ip>"
+            echo "✅ Staging deployed: http://<ip>/staging"

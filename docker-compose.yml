@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - react-prod:/usr/share/nginx/html
+      - react-staging:/usr/share/nginx/html/staging
+    depends_on:
+      - prod
+      - staging
+
+  prod:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    image: react-app-prod
+    container_name: react-app-prod
+    volumes:
+      - react-prod:/app/dist
+    command: sh -c "echo 'Prod built.'"
+
+  staging:
+    build:
+      context: .
+      dockerfile: Dockerfile.staging
+    image: react-app-staging
+    container_name: react-app-staging
+    volumes:
+      - react-staging:/app/dist
+    command: sh -c "echo 'Staging built.'"
+
+volumes:
+  react-prod:
+  react-staging:
