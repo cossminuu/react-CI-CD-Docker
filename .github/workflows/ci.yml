@@ -2,10 +2,14 @@ name: React CI
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - staging
+      - 'feature/**'
   pull_request:
-    branches: [main]
-
+    branches:
+      - main
+      - staging
 jobs:
   test:
     runs-on: ubuntu-latest
