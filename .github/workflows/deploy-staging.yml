@@ -25,8 +25,10 @@ jobs:
             git clean -fd
             git pull origin staging
 
-            echo "📦 Rebuilding with docker-compose..."
-            docker compose down
+            echo "🧹 Stopping containers and removing volumes..."
+            docker compose down --volumes
+
+            echo "🔨 Rebuilding containers..."
             docker compose up --build -d
 
             echo "✅ Staging deployed: http://<ip>/staging"

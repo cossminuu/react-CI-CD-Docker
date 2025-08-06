@@ -22,7 +22,7 @@ services:
     container_name: react-app-prod
     volumes:
       - react-prod:/app/dist
-    command: sh -c "echo 'Prod built.'"
+    command: sh -c "npm ci && npm run build"
 
   staging:
     build:
@@ -32,7 +32,7 @@ services:
     container_name: react-app-staging
     volumes:
       - react-staging:/app/dist
-    command: sh -c "echo 'Staging built.'"
+    command: sh -c "npm ci && npm run build"
 
 volumes:
   react-prod:
