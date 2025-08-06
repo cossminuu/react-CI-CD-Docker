@@ -21,7 +21,7 @@ services:
     image: react-app-prod
     container_name: react-app-prod
     volumes:
-      - react-prod:/app/dist
+      - react-prod:/dist
     command: sh -c "npm ci && npm run build"
 
   staging:
@@ -31,7 +31,7 @@ services:
     image: react-app-staging
     container_name: react-app-staging
     volumes:
-      - react-staging:/app/dist
+      - react-staging:/dist
     command: sh -c "npm ci && npm run build"
 
 volumes:
